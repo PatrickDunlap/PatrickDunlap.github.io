@@ -1,0 +1,18 @@
+#Title { /*For the title on top of the page*/
+    color: green;
+    text-align: center;
+    font-size: size: 200%;
+  }
+  #Homework{ /* For the homework list*/
+    color:black;
+    font-weight: bold;
+    text-align: left;
+
+  }
+  .Facts{
+    font-weight: bold;
+  }
+
+article{
+  border-top: 1px solid black; /*border for the page*/
+}

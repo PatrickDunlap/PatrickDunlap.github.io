@@ -1,0 +1,104 @@
+header, hgroup, nav, footer, figure, figcaption, aside, section, article {
+	display: block;
+	
+}
+body {
+	background-image: url("ptrbackground.jpg");
+	background-color: ;
+	color: #666666;
+	font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#content, footer
+{
+	margin-left: 20%;  /*set everything to be to the right of the navbar and take up 80% of page */
+	width: 60%;
+	min-width: 600px;
+	list-style-image: url("marker.gif");
+	background-color: white;
+	padding-left: 30px;
+	padding-right: 10px;
+
+}
+
+#wrapper {
+	margin-left: 20%;
+	margin-right: 20%;
+
+}
+nav ul {
+	font-size: 1.2em;
+	height: 79.7%;   /*Make the navbar on the left side of the page, and take up 20% of page */
+	left: 305px;
+	position: fixed;
+	padding-top: 10px;
+	list-style-type: none;
+	text-emphasis-color: #00569f;
+	font-weight: bold;
+	background-color: #3399CC;
+	padding-left: 35px;
+	padding-right: 35px;
+}
+
+nav ul li a {
+
+text-decoration: none;
+
+color: #000033;
+}
+nav a:visited {
+	color: #000033;
+	list-style-type: none;
+	text-emphasis-color: #000033;
+	font-weight: bold;
+
+
+}
+nav a:hover {
+	color: #000033;
+	list-style-type: none;
+	text-emphasis-color: #000033;
+	font-weight: bold;
+
+
+
+}
+h1 {
+	margin-bottom: 0;
+	padding: 15px;
+	background-image: url("sunset.jpg");
+	background-image: url("sunset.jpg"), linear-gradient(#000033, #000033
+	);
+	background-position: right;
+	/*background-image: linear-gradient(blue,#6495ED); */
+	background-repeat: no-repeat;  
+	/*background-color: #00569f;*/
+	color: white;
+	
+}
+h2 {
+	color: #3399CC;
+	
+}
+h1,
+h2 {
+	font-family: Georgia, "Times New Roman", serif;
+}
+#contact {
+	font-size: 90%;
+	padding-top: 20px;
+}
+dt {
+	color: #000033;
+}
+footer {
+	padding-top: 70px;
+	padding-bottom: 10px;
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+.resort{
+	text-emphasis-color: #00569f;
+	font-weight: bold;
+}
