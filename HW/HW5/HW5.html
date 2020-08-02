@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/styling.css">
+	
+  </head>
+  <body>
+    <form onsubmit= "return false">
+      <label for="LowHor">Low Horizontal Bound:</label> <!-- This is the form which takes the inputs and gives them an ID--> 
+      <input type="text" id="LowHor" name="LowHor" value ="1">
+      <label for="HighHor">High Horizontal Bound:</label>
+      <input type="text" id="HighHor" name="HighHor" value ="12">
+      
+      <label for="LowVer">Low Vertical Bound:</label>
+      <input type="text" id="LowVer" name="LowVer" value ="1">
+      <label for="HighVer">High Vertical Bound:</label>
+      <input type="text" id="HighVer" name="HighVer" value ="12">
+      <input type = "submit" value = "Submit" onclick = "return tableCalculation()">
+    </form>
+    <div id="table"></div> <!-- this is where the table will go-->
+    <div id="error"></div>  <!--If the user enters invalid input-->
+    <br><br>
+
+  
+  </body>
+  <script type="text/javascript" src="js/table.js"></script>  
+</html>
