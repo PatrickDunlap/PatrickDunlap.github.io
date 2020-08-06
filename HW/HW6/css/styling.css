@@ -1,0 +1,69 @@
+label{
+    display: inline-block; /*CSS to make the text boxes allign and look better */
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+    top: -20%;
+    padding: 5px;
+
+}
+input {
+  display: inline-block;
+  float: left;
+  padding: 7px;
+}
+
+.error{    /*text for error message*/
+    color: red;
+    text-align: center;
+    padding: 7px;
+    font-weight: 200%;
+    
+}
+
+
+.submit{ /*Move the submit button */
+    position: relative;
+    color: blue;
+    top: 45px;
+    left: -140px;
+
+}
+
+input.error{  /* Make the text itself red when a wrong input is entered */
+    color: red;
+}
+
+
+body{
+    padding-top: 100px;
+    padding-left: 100px;
+    background-color: lightblue;
+}
+
+table{  /*Put the table in the correct spot and padding and alligment in such a way that another table cannot be made after one is present*/
+    display: block;
+    position: relative;
+    padding: 20px;
+    right:-50px;
+}
+td{
+    padding: 8px;   /*Making spacing equal */
+    font-size: 125%;
+}
+
+td:nth-child(1) {  /*Make the border line */
+    border-right: solid;
+    border-color: black;
+}
+
+td:nth-child(even) {  /*Make text color alternate */
+    color:blue;
+    
+}
+
+tr:first-child td{
+    border-bottom: solid;
+    border-color: black;
+}
