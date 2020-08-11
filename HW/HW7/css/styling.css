@@ -1,0 +1,127 @@
+label{
+    display: inline-block; /*CSS to make the text boxes allign and look better */
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+    top: -20%;
+    padding: 5px;
+    position: relative;
+    
+
+}
+input {
+  display: inline-block;
+  float: left;
+  padding: 7px;
+} 
+
+.error{    /*text for error message*/
+    color: red;
+    text-align: center;
+    padding: 7px;
+    clear: right;
+    font-weight: 200%;
+    display: block;
+    
+}
+
+
+#error{    /*text for error message*/
+    color: red;
+    text-align: center;
+    padding: 7px;
+    clear: right;
+    font-weight: 200%;
+    display: inline;
+    clear: both;
+    
+}
+
+
+
+#prevtabs{ 
+    position: relative;
+    color: blue;
+    top: 45px;
+    right: -5px;
+}
+
+
+.submit{ /*Move the submit button */
+    position: relative;
+    color: blue;
+    top: 45px;
+    
+
+}
+
+input.error{  /* Make the text itself red when a wrong input is entered */
+    color: red;
+}
+
+
+body{
+    padding-top: 100px;
+    padding-left: 100px;
+    background-color: lightblue;
+}
+
+table{  /*Put the table in the correct spot and padding and alligment in such a way that another table cannot be made after one is present*/
+    padding: 20px;
+   /* right:-50px; */
+    clear:left;
+    top: 45px;
+    margin-left: 75px;
+    position: relative;
+}
+td{
+    padding: 12px;   /*Making spacing equal */
+    font-size: 125%;
+}
+
+td:nth-child(1) {  /*Make the border line */
+    border-right: solid;
+    border-color: black;
+}
+
+td:nth-child(even) {  /*Make text color alternate */
+    color:blue;
+    
+}
+
+tr:first-child td{
+    border-bottom: solid;
+    border-color: black;
+}
+
+
+
+
+
+
+#tabs {
+    display: block;
+    margin-top: 25px;
+  }
+  
+  /* Slider background color / settings */
+ 
+  
+  /* Just the slider handle */
+  .ui-slider {   /*https://stackoverflow.com/questions/20150447/customizing-jquery-ui-slider-height-width  also made in core css file*/
+    float: left;
+    height: 15px;
+    width: 150px;
+    padding: 1px;
+    top: 6px;
+    position: relative;
+  }
+
+    .ui-tabs{
+        background-color: pink;
+
+}
+
+
+  

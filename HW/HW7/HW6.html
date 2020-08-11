@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/styling.css">
+    <link rel="stylesheet" href="jquery-ui-1.12.1/theme.css">
+    <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.structure.css">
+  </head>
+  <body>
+    <div id="error"></div>  <!--If the user enters invalid input-->
+    <form id = "form" name="form" method="GET">
+      
+      <div>
+      <label for="LowHor">Low Horizontal Bound:</label> <!-- This is the form which takes the inputs and gives them an ID--> 
+      <input type="number" id="LowHor" name="LowHor" value ="1">
+       <div id="LowHorSlider"></div>
+        </div>
+
+
+        <div>
+
+      <label for="HighHor">High Horizontal Bound:</label>
+      <input type="number" id="HighHor" name="HighHor" value ="12">
+      <div id="HighHorSlider"></div>
+
+    </div>
+    <div>
+
+      <label for="LowVer">Low Vertical Bound:</label>
+      <input type="number" id="LowVer" name="LowVer" value ="1">
+      <div id="LowVerSlider"></div>
+    </div>
+
+    <div>
+
+      <label for="HighVer">High Vertical Bound:</label>
+      <input type="number" id="HighVer" name="HighVer" value ="12">
+      <div id="HighVerSlider"></div>
+    </div>
+
+
+   
+      <input id="submit" type="Submit" class="submit" value="Save Table" onClick="save_tab();" value="Save Table">  <!-- This will call the save tab function when button is clicked-->
+      <input type="button" id = "prevtabs" onclick="window.location.href='#taba'" value="Previous Tables" /> <!-- Source: https://www.w3docs.com/snippets/html/how-to-create-an-html-button-that-acts-like-a-link.html-->
+      
+
+    </form>
+    
+    <div id="table"  ></div> <!-- this is where the table will go-->
+    <div id="taba"></div>
+    <div id="tabs">
+    
+
+      <ul>
+      </ul>
+    </div>
+   
+
+
+
+
+    
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+    <script src="jquery.validate.min.js"></script>
+    <script src="additional-methods.js"></script>
+
+    
+
+    <script type='text/javascript' src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+
+
+    <script type="text/javascript" src="js/table.js"></script>
+    <script> 
+    slider();
+    validate();
+    auto_submit();
+    
+    </script> <!-- This source was very useful on getting the script to run https://jqueryvalidation.org/validate/-->
+    
+    <!-- JQuery Script-->
+    <br><br>
+
+  
+  </body>
+   
+</html>
