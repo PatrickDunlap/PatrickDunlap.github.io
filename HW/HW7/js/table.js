@@ -272,7 +272,6 @@ function createTable(table)
             $( "#tabs" ).tabs("refresh");
           }
           catch (e) {
-            //console.log(e);
           }
     
           //Source: https://api.jqueryui.com/tabs/#method-destroy
