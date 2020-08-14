@@ -1,31 +1,4 @@
-/*
-    File: ~/js/scrabble/buttons.js
-    91.461 Assignment 9: Implementing a Bit of Scrabble with Drag-and-Drop
-    Jason Downing - student at UMass Lowell in 91.461 GUI Programming I
-    Contact: jdowning@cs.uml.edu or jason_downing@student.uml.edu
-    MIT Licensed - see http://opensource.org/licenses/MIT for details.
-    Anyone may freely use this code. Just don't sue me if it breaks stuff.
-    Created: Nov 24, 2015.
-    Last Updated: Dec 8, 9PM.
 
-    This JavaScript file is for the 9th assignment, "Scrabble".
-
-    This file contains functions that run when one of the three buttons are pressed.
-    These include:
-
-    Submit word -> runs check word function that sees if the word is valid;
-                     NO ->  it prints an error message to the screen.
-                    YES ->  it prints a success message and adds another button
-                            for saving the word and playing another.
-
-    Recall tiles -> runs a function to return all currently played tiles to the rack.
-                    SAVED WORDS ARE NOT RETURNED, SEE "RESET BOARD" BUTTON
-
-    Reset Board -> runs a function to confirm if the user wants to reset the board.
-                     NO ->  cancels the reset so nothing happens.
-                    YES ->  resets the entire game board, returning all tiles to the
-                            "bag" and resetting the score / word.
-*/
 
 
 /**
@@ -70,11 +43,10 @@ function submit_word() {
     // If it is, AWESOME! The user is so smart.
     $("#messages").html("<br><div class='highlight_centered_success'> \
     Nice job! \"" + word + "\" is considered a word by the game's dictionary!<br><br> \
-    <button class='smaller_button' onclick='confirm_save_word();'>Save Word & Play Again.</button><br><br></div>");
+    <button class='smaller_button' onclick='save_word();'>Save Word & Play Again.</button><br><br></div>");
     return 1;
   }
   else {
-    // User isn't so smart. Tell them to try again.
     $("#messages").html("<br><div class='highlight_centered_error'> \
     Sorry. \"" + word + "\" is not a word in the English dictionary. \
     I suggest trying a different word. Or try resetting your tiles and trying again.</div>");
@@ -84,38 +56,6 @@ function submit_word() {
 }
 
 
-/**
- *    This function confirms that the user wants to save the currently played word.
- *    This function uses a cool alert replacement called Sweet Alert.
- *    URL: https://t4t5.github.io/sweetalert/
- */
-function confirm_save_word() {
-  swal({
-    title: "Are you sure?",
-    text: "This will save the current word to the game board.\n\
-    You will not be able to modify the word afterwards.\n \
-    Are you sure you want to keep this word and play another one?",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes.",
-    closeOnConfirm: true
-    },
-    // This is from the example page at: https://t4t5.github.io/sweetalert/
-    // Basically I can quit if the user hits cancel, or continue if they hit Yes.
-    function(isConfirm) {
-      if (isConfirm) {
-        save_word();
-        return false;
-      }
-      else {
-        // Let the user know what's going on.
-        $("#messages").html("<br><div class='highlight_centered_error'> \
-        SUBMIT WORD CANCELED.</div>");
-        return false;
-      }
-  });
-}
 
 
 /**
@@ -217,9 +157,7 @@ function save_word() {
   // And update the word / score as well.
   find_word();
 
-  // Update remaining letters table.
 
-  // Should be done now!
   return;
 }
 
@@ -240,7 +178,7 @@ function reset_tiles() {
     // Reposition the tile on top of the rack, nicely in a row with the other tiles.
 
     // We first get the rack's location on the screen. Idea from a Stackoverflow post,
-    // URL: https://stackoverflow.com/questions/885144/how-to-get-current-position-of-an-image-in-jquery
+    // Source Used https://stackoverflow.com/questions/885144/how-to-get-current-position-of-an-image-in-jquery
     var pos = $("#the_rack").position();
 
     // Now figure out where to reposition the board piece.

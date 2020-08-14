@@ -1,23 +1,3 @@
-/*
-    File: ~/js/scrabble/droppable.js
-    91.461 Assignment 9: Implementing a Bit of Scrabble with Drag-and-Drop
-    Jason Downing - student at UMass Lowell in 91.461 GUI Programming I
-    Contact: jdowning@cs.uml.edu or jason_downing@student.uml.edu
-    MIT Licensed - see http://opensource.org/licenses/MIT for details.
-    Anyone may freely use this code. Just don't sue me if it breaks stuff.
-    Created: Nov 24, 2015.
-    Last Updated: Dec 9, 4PM.
-
-    This JavaScript file is for the 9th assignment, "Scrabble".
-
-    This file contains the droppable code. This basically controls almost all of
-    the Scrabble game logic. It uses other functions, such as the score / util,
-    even draggable / buttons / variables files. Basically everything connects to
-    this file.
-
-    It is also VERY badly done. It needs to be separated out into more functions
-    that would make it much easier to read.
-*/
 
 
 /**
