@@ -5,6 +5,7 @@ In the scrabble project, I implemnted the following features:
 -The program can save a word and reset your rack while keeping track of every word you have played thus far
 -Tiles can be reset to their original places
 -The program allows you to reset the board back to what it was originally before you placed specific tiles
+-Extensive error checking to be sure a correct move is made (no diagonal letters, letters must be adjacent, etc.)
 
 Bugs:
 

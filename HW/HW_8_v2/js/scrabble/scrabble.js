@@ -54,14 +54,17 @@ function word_multiplier() {
   // Get board array length. This will be useful for our checks next.
   var gameboard_length = game_board.length;
 
+  // Go through the game board and see if any spots have the
+  // class "double_word" or "triple_word"
   for (var i = 0; i < gameboard_length; i++) {
     var space_ID = "#" + game_board[i].id
 
     if ( $(space_ID).hasClass('double_word') == true ) {
-      
+      // Sweet! Double the word's value!
       return 1;
     }
     else if ( $(space_ID).hasClass('triple_word') == true ) {
+      // SWEET! IT'S A TRIPLE!
       return 2;
     }
   }
@@ -130,7 +133,9 @@ function getRandomInt(min, max) {
 }
 
 
-//gets the droppableID
+/**
+*    This function gets the row / col index for given droppableID
+*/
 function find_table_position(droppableID) {
 
 // Figure out the row / col
@@ -308,8 +313,11 @@ function save_word() {
   var word;                                       // array for the current word
   var index = 0;
 
+  // Let the user know what's going on.
   $("#messages").html("<br><div class='highlight_centered_success'> \
-  WORD SAVED.</div>");
+  SAVING WORD.</div>");
+
+  // Move the game board array into the compete_words array.
   // First make an array and save everything in the game array into it.
   word = [];
 
@@ -329,10 +337,11 @@ function save_word() {
     try {
       $("#" + tile_ID).draggable('disable');
 
+      // Also change the id of the tile so it doesn't get recalled either.
       // use the game board length and current letter to make each disabled tile have a unique id.
       $("#" + tile_ID).attr("id", "disabled" + (i + complete_words.length) );  // start at 0, add length to make unique
 
-      // Generate a new letter
+      // Generate a new letter to be used.
       var new_letter = get_random_tile();
 
       // Change the game tiles array to reflect the new letter.
@@ -501,6 +510,7 @@ var complete_words = [
 
 ];
 
+// JavaScript array of objects to determine what letter each piece is.
 // This gets configured by load_scrabble_pieces()
 var game_tiles = [
   {"id": "piece0", "letter": "A"},
@@ -515,11 +525,12 @@ var game_tiles = [
 // Boolean for reading left to right or top to bottom
 var left_right = false;
 
-
+// For detecting multiple words played
+// TODO: is this being used?
 var number_of_words = 0;
 
 // Used for getting the original position of a draggable object.
-// Source: https://stackoverflow.com/questions/12350259/original-position-of-a-draggable-in-jquery-ui
+// As seen here: https://stackoverflow.com/questions/12350259/original-position-of-a-draggable-in-jquery-ui
 var startPos;
 
 // source code: http://ejohn.org/blog/dictionary-lookups-in-javascript/
@@ -545,7 +556,9 @@ var word_score = 0;
 // First letter for 2nd and on words played.
 var first_letter = "";
 
-
+// Keep track of the letters of used words. This is handy for tracking adding an "S" to
+// a currently created word "hope" - if we had an S, then we have 5 letters. If we remove an
+// S, we have 4 letters that need to be removed.
 var used_letters = 0;
 
 
@@ -581,6 +594,16 @@ function load_scrabble_pieces() {
     img_left = pos.left + 30 + (50 * i);      // This controls left to right placement.
     img_top = pos.top + 30;                   // This controls top to bottom placement.
 
+    /* Load onto the page and make draggable.
+       The height / width get set using these tricks:
+       https://stackoverflow.com/questions/10863658/load-image-with-jquery-and-append-it-to-the-dom
+       https://stackoverflow.com/questions/2183863/how-to-set-height-width-to-image-using-jquery
+       https://stackoverflow.com/questions/9704087/jquery-add-image-at-specific-co-ordinates
+
+       The relative stuff came from this w3schools page. I realized I could set the top and left
+       relative to the rack (and the board for the droppable targets), which makes things wayyyyy
+       easier. URL: http://www.w3schools.com/css/css_positioning.asp
+    */
     // Add the piece to the screen
     $("#rack").append(piece);
 
@@ -623,14 +646,17 @@ function load_droppable_targets() {
       var droppableID = $(this).attr("id");
       
 
-      //source used: https://stackoverflow.com/questions/554273/changing-the-image-source-using-jquery
+      // Update the tile piece with the new image.
+      // The idea came from this post on Stackoverflow:
+      // https://stackoverflow.com/questions/554273/changing-the-image-source-using-jquery
+      // I had to modify this to work on different IDs, as simply "draggableID" did nothing.
       $("#" + draggableID).attr("src", "img/scrabble/Scrabble_Tile_" + new_letter + ".jpg");
 
-      // Place the tile back in original spot
+      // Place the tile back where it came from, either the rack or the game board.
       var posX = startPos.left;
       var posY = startPos.top;
 
-      // Move the draggable image
+      // Move the draggable image so it doesn't fly around randomly like to the bottom of the screen or whatever.
       ui.draggable.css("left", posX);
       ui.draggable.css("top", posY);
       ui.draggable.css("position", "absolute");
@@ -645,7 +671,12 @@ function load_droppable_targets() {
 
 
 
-  //main rack logic
+  /**
+   *      Rack logic. Positions the rack on page load.
+   *      Recalling the tiles is handled by the reset_tiles function.
+   *      Positioning is done using the ui.helper.position method which the jQuery UI provides.
+   *
+   */
   $("#the_rack").droppable( {
     accept: ".ui-draggable",
     appendTo: "body",
@@ -667,19 +698,24 @@ function load_droppable_targets() {
           var spot_id = "#" + game_board[i].id;
           $(spot_id).droppable("enable");
 
+          // We found it! Remove it from the game board array.
+          // URL for this help: https://stackoverflow.com/questions/5767325/remove-a-particular-element-from-an-array-in-javascript
           game_board.splice(i, 1);
 
           find_word();            // Update the word & score.
 
-
+          // This trick comes from Stackoverflow.
+          // URL: https://stackoverflow.com/questions/849030/how-do-i-get-the-coordinate-position-after-using-jquery-drag-and-drop
           var currentPos = ui.helper.position();
           var posX = parseInt(currentPos.left);
           var posY = parseInt(currentPos.top);
 
+          // Move the draggable image so it doesn't fly around randomly like to the bottom of the screen or whatever.
           ui.draggable.css("left", posX);
           ui.draggable.css("top", posY);
           ui.draggable.css("position", "absolute");
 
+          // Move the tile over to the rack. Prevents weird bugs where the table changes sizes and thinks there's two tiles in one spot.
           $('#rack').append($(ui.draggable));
 
           // If there's any completed words, and we just removed the last currently played word,
@@ -704,22 +740,30 @@ function load_droppable_targets() {
   });
 
 
-  //main logic
+  /**
+   *    Scrabble game board logic. Allows swapping of tiles that are not saved,
+   *    determines valid game moves for both one word and multiple words. One word
+   *    logic works very well - multiple word logic is bound to have bugs due to
+   *    the complexity of having many words on the board at once.
+   *
+   */
   $("#scrabble_board td").droppable({
     accept: ".ui-draggable",
     appendTo: "body",
     drop: function(event, ui) {
-      // set the dropable data
+      // To figure out which draggable / droppable ID was activated, I used this sweet code from stackoverflow:
+      // https://stackoverflow.com/questions/5562853/jquery-ui-get-id-of-droppable-element-when-dropped-an-item
       var draggableID = ui.draggable.attr("id");    // The current Scrabble tile ID
       var droppableID = $(this).attr("id");         // The current spot on the game board ID
       var duplicate = false;            // This originally meant "we've seen this tile already". I will need to use this to support swapping of tiles.
-      var dup_index = 0;                
+      var dup_index = 0;                // I think this was to be where in the game board array the duplicate is.
+      //left_right                      // Determines if the word is read left to right, or top to bottom. (THIS IS GLOBAL, IT NEEDS TO BE FOR THE FIND_WORD FUNCTION!)
       var insert_beg = false;           // Determines if we should tiles at the beginning or the end.
-      var star_spot = "row7_col7";      // Star in the center
-      var gameboard_length = 0;         // The length of the game board array.
+      var star_spot = "row7_col7";      // Star in the middle of the board.
+      var gameboard_length = 0;         // The length of the game board array (global array).
       var number_of_words = 0;          // Number of played words.
       var valid = 0;                    // Used for determining valid right angles.
-      var prev_spaceID = "";            // Used for determining l v r
+      var prev_spaceID = "";            // Used for determining left/right vs up/down and also inserting at the beginning / end. And even saved letters.
 
       // Remove old error messages.
       $("#messages").html("");
@@ -786,7 +830,10 @@ function load_droppable_targets() {
       }
 
       if(number_of_words == 0) {
-      //if empty
+        //*****************************************
+        //* Game board is empty case.
+        //* If so, the user must start at the star.
+        //*****************************************
         if (gameboard_length == 0) {
           if (droppableID != star_spot) {
             /* The only valid place is the star, row7_col7 */
@@ -821,10 +868,11 @@ function load_droppable_targets() {
             [ past_pos[0], parseInt(past_pos[1]) + 1]
           ];
 
-          // check if we have one of the allowed positions.
+          // See if we have one of the allowed positions.
           var test = cur_pos.toString();
 
           if (test == allowed_arrays[0].toString() || test == allowed_arrays[1].toString() ) {
+            // Yeah! And it's top to bottom!
             console.log("Allowed. T/B");
             left_right = false;
 
@@ -835,7 +883,7 @@ function load_droppable_targets() {
             }
           }
           else if (test == allowed_arrays[2].toString() || test == allowed_arrays[3].toString() ) {
-
+            // Yep! And it's left to right too!
             console.log("Allowed. L/R");
             left_right = true;
 
@@ -859,6 +907,19 @@ function load_droppable_targets() {
         }
 
         if (gameboard_length >= 2) {
+          /*
+              X+X
+              X*X
+              X*X
+              X+X
+
+              * = the first / second tiles
+              + = valid space
+              X = NOT VALID SPACE
+
+              Assuming (7,7) & (8,7) are already placed,
+              then two valid places are (6,7) & (9,7)
+          */
           if (left_right == true) {     // **** Left and right case   ****
             // First col - 1 and last col + 1 are valid, with same row.
             var valid_left = find_table_position(game_board[0].id);
@@ -883,8 +944,9 @@ function load_droppable_targets() {
             else {                // Not allowed.
               // Tell the user what the error was.
               $("#messages").html("<br><div class='highlight_centered_error'> \
-              left and right placements are allowed when 2 or more tiles are played.</div>");
+              Sorry, only left and right placements are allowed when 2 or more tiles are played.</div>");
 
+              // Force the draggable to revert. Idea from:
               // https://stackoverflow.com/questions/6071409/draggable-revert-if-outside-this-div-and-inside-of-other-draggables-using-both
               ui.draggable.draggable('option', 'revert', true);
               return;
@@ -924,7 +986,9 @@ function load_droppable_targets() {
           }
         }
       }
-
+      //*************************************************************************
+      //* Logic for more than one word here
+      //*************************************************************************
       else {
         // Need to first determine all the possible valid moves.
         // This will be an array of IDs that are right angles around
@@ -933,7 +997,9 @@ function load_droppable_targets() {
 
         // We will first determine valid spaces to move to around saved words.
 
-
+        //************************************************************
+        //* Scan COMPLETED WORDS array for possible valid placement
+        //************************************************************
         for(var i = 0; i < number_of_words; i++) {
           // Get number of tiles in the current word.
           var num_tiles = complete_words[i].length;
@@ -944,7 +1010,15 @@ function load_droppable_targets() {
             var cur_letterID = complete_words[i][x].id;
             var coordinates = find_table_position(cur_letterID);    // Get the row / col values.
 
+            /*
+                X*X
+                *+*
+                X*X
 
+                + = current position to look at
+                * = valid spots, l/r = row(-1),col & row(+1),col + t/b = row,col(-1) & row,col(+1)
+                X = not valid spot
+            */
             // Allow both left/right & top/bottom placement.
             if(gameboard_length < 1) {
               valid = [
@@ -1020,7 +1094,16 @@ function load_droppable_targets() {
           var cur_letterID = game_board[i].id;
           var coordinates = find_table_position(cur_letterID);    // Get the row / col values.
 
+          /*
+              X*X
+              *+*
+              X*X
 
+              + = current position to look at
+              * = valid spots, l/r = row(-1),col & row(+1),col + t/b = row,col(-1) & row,col(+1)
+              X = not valid spot
+          */
+          // Allow both left/right & top/bottom placement.
           if(gameboard_length < 1) {
             valid = [
               "row" + (parseInt(coordinates[0]) - 1) + "_col" + coordinates[1],     // top of space
@@ -1044,7 +1127,9 @@ function load_droppable_targets() {
             ];
           }
 
-
+          // Make sure each space is not disabled, and not in the possible moves array already.
+          // URL for the droppable disabled: https://api.jqueryui.com/droppable/#option-disabled
+          // URL for the $.inArray function: https://stackoverflow.com/questions/6116474/how-to-find-if-an-array-contains-a-specific-string-in-javascript-jquery
           if(gameboard_length == 0) {
             for(y = 0; y < 4; y++) {
               if(String(valid[y]) == droppableID) { // See if we find our space.
@@ -1063,7 +1148,10 @@ function load_droppable_targets() {
           }
         }
 
-
+        // Now see if the given spot the user tried to drop in is in the valid list.
+        // Got the idea for this from Stackoverflow. This little JS code will return -1 if the array does
+        // not contain the current droppable target, or the index if it does. We just need to check for -1.
+        // https://stackoverflow.com/questions/12623272/how-to-check-if-a-string-array-contains-one-string-in-javascript
         var is_valid = possible_moves.indexOf(droppableID);
 
         // It is a valid move if is_valid isn't -1.
@@ -1146,12 +1234,12 @@ function load_droppable_targets() {
                   tmp_obj['id'] = test_cord;          // This style works as an object.
                   tmp_obj['tile'] = test_cord;
 
-                  // was it inserted at the beginning or the end?
-                  if(insert_beg != true) {          
+                  // Do we insert at the beginning or the end?
+                  if(insert_beg != true) {          // No! Beginning!
                     game_board.unshift(tmp_obj);
                     col_index--;
                   }
-                  else {                            
+                  else {                            // Yes, the end!
                     game_board.push(tmp_obj);
                     col_index++;
                   }
@@ -1159,6 +1247,7 @@ function load_droppable_targets() {
                   used_letters++;                   // Keep track of used letters.
                 }
                 else {
+                  // Time to break. This prevents reading the entire row and adding silly letters.
                   test_word = false;
                 }
               }
@@ -1221,6 +1310,7 @@ function load_droppable_targets() {
           $("#messages").html("<br><div class='highlight_centered_error'> \
           Sorry, that wasn't a valid move. Tiles must be placed at right angles, as diagonals are not allowed.</div>");
 
+          // Alert users to restrictions on row / columns.
           // If the game board length is 0, then any placement around tiles is fine. So the above message is completely valid.
           // However, when the game board greater than 0, the user must stay in the same column or row.
           if(gameboard_length > 0) {
