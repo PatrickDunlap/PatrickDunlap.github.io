@@ -46,11 +46,10 @@
 
     <div class="col-sm-14 col-md-5 col-lg-7">
 
-      <div class="center_text_images">
+      <div class="centered">
 
-        <h1 class="name">
-          <span class="highlight_fun">SCRABBLE v2.8.1</span>
-        </h1>
+        
+          <div id="title">SCRABBLE</span>
 
         <br>
 
@@ -60,13 +59,13 @@
 
 
         <div class="col-sm-14 col-md-14 col-lg-14">
-          <div class="highlight_centered">
+          <div class="centered">
             Word: <span id="word">____</span>
             <div class="divider"></div>
-            Score: <span id="score">0</span>
+            Current Score: <span id="score">0</span>
           </div>
         </div>
-
+      </div>
       
         <div class="col-sm-8 col-md-14 col-lg-14">
           <!--  Add some vertical spacing between the word/score and the two submit buttons
@@ -80,7 +79,7 @@
 
           <!--  Add some horizontal spacing between the three buttons. -->
           <div class="divider"></div>
-          <button onclick="confirm_reset();">Reset Board</button>
+          <button onclick="reset_game_board();">Reset Board</button>
         </div>
 
         <!-- Error / Success messages appear in this div. -->
@@ -128,7 +127,7 @@
           Game board based off of this image of Scrabble:
           https://farm1.static.flickr.com/23/30997788_a595e9e158_o.jpg
       -->
-      <div class="center_text_images">
+      <div class="centered">
         <table id="scrabble_board">
           <!-- First Row -->
           <tr>
@@ -853,17 +852,9 @@
       </div>
       <br>
 
-      <!-- Spacing to force the swap tile over to the right -->
-      <div class="col-sm-1 col-md-2 col-lg-1"></div>
+     
 
-      <div class="col-sm-5 col-md-4 col-lg-5">
-        <!-- Get new tile spot. Moved this right next to the rack for easy swapping of tiles. -->
-        <div id="get_new_tile">
-          <p>Swap a tile for a new one!</p>
-          <p>(drop the tile here)</p>
-        </div>
-      </div>
-
+      
       <!--
         Scrabble rack from:
         https://pixabay.com/static/uploads/photo/2014/07/31/20/48/scrabble-tile-holder-406774_640.png
@@ -871,21 +862,14 @@
         NO LONGER USING THIS CLASS. SAVED FOR FUTURE REFERENCE.
         class="resize_rack"
       -->
-      <div class="center_text_images">
+      <div class="centered">
         <img id="the_rack" src="img/scrabble/Scrabble_Rack_flat.resized.png" alt="scrabble rack">
         <div id="rack"></div>   <!-- THIS ID IS REQUIRED TO APPEND THE TILES TO. -->
       </div>
     </div>
   </div>        <!-- End of the row-fluid container -->
 
-  <!--
-      These are moved to the bottom of the <body> tag to decrease website load time.
-      This stackoverflow post is helpful for this issue:
-      https://stackoverflow.com/questions/6625773/where-should-i-put-the-css-and-javascript-code-in-an-html-webpage
-
-      See Yahoo's best practice rules as well:
-      https://developer.yahoo.com/performance/rules.html#css_top=
-   -->
+  
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins). -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>

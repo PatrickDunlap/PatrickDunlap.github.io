@@ -17,6 +17,12 @@ a.anchor {
   visibility: hidden;
 }
 
+#title{
+  text-align: center;
+  color: green;
+  font-size: 300%;
+}
+
 body {
   /*
       Background image was found at the following URL (I did not create nor own this image):
@@ -65,7 +71,7 @@ html {
   This post explained how to do so:
   https://stackoverflow.com/questions/7226056/equivalent-to-center-tag-in-css
 */
-.center_text_images {
+.centered {
   margin: auto;
   text-align: center;
 }
@@ -174,21 +180,7 @@ td.larger_td {
   text-align: center;
 }
 
-/*
-      Note that I made the "special tile" lettering appear as background images.
-      If I tried doing plain old text, it LOOKED fine, until I tried dropping a
-      tile onto a special tile. Then the tile would appear above the tile which
-      is not what I wanted. The current behavior is much nicer, the tile appears
-      over the droppable space, and no letters appear when this happens.
 
-      I created these four images (double / triple ones) myself using GIMP.
-      They are just 50px by 50px images with a colored background layer and
-      a text field. The original template can be found in the /img/ folder as
-      a .xcf file, "special_tile.xcf". You may edit this if you dislike my colors
-      but you'll need to replace all the double / triple images if you do so, or
-      copy my images if you just want to use this code.
-
-*/
 
 /* Double / Triple letter CSS */
 .double_letter {
@@ -243,14 +235,13 @@ td.larger_td {
   z-index: 0;           /* This needs to be below the pieces z-index of 1. */
 }
 
-/* Need to figure out what this is for. */
 .resize_board {
   height: 125px;
   width: auto;
 }
 
 .pieces {
-  position: absolute;   /* Try absolute or relative and see what works. */
+  position: relative;   
   height: 40px;
   width: 40px;
   z-index: 9999;           /*  THIS MUST BE LOWER THAN THE TARGET. PIECES IS DRAGGABLE, DROPPABLE TABLE IS THE TARGET.
@@ -261,7 +252,7 @@ td.larger_td {
 .highlight_centered_smaller {
   background-color: black;
   color: white;
-  font-family: "Ubuntu";
+  font-family: "Georgia";
   font-size: 150%;
   font-weight: 900;
   text-align: center;
@@ -272,7 +263,7 @@ td.larger_td {
   background-color: black;
   border: 1px solid green;
   color: green;
-  font-family: "Ubuntu";
+  font-family: "Georgia";
   font-size: 150%;
   font-weight: 900;
   text-align: center;
@@ -283,7 +274,7 @@ td.larger_td {
   background-color: black;
   border: 1px solid red;
   color: red;
-  font-family: "Ubuntu";
+  font-family: "Georgia";
   font-size: 150%;
   font-weight: 900;
   text-align: center;

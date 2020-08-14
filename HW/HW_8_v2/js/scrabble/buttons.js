@@ -42,7 +42,7 @@ function submit_word() {
   if ( dict[ word ] ) {
     // If it is, AWESOME! The user is so smart.
     $("#messages").html("<br><div class='highlight_centered_success'> \
-    Nice job! \"" + word + "\" is considered a word by the game's dictionary!<br><br> \
+    Nice job! \"" + word + "is a good word!\" <br><br> \
     <button class='smaller_button' onclick='save_word();'>Continue?.</button><br><br></div>");
     return 1;
   }
@@ -87,10 +87,8 @@ function save_word() {
     obj["letter"] = find_letter(game_board[i].tile);
     var tile_ID = game_board[i].tile;
 
-    word.push(obj);   // Push obj back.
+    word.push(obj);   // Push object back.
 
-    // Mark the space as disabled so that the user cannot swap the tile in the future.
-    // See this Stackoverflow post for more info: https://stackoverflow.com/questions/3948447/jquery-ui-droppable-only-accept-one-draggable
     $("#" + obj["id"]).droppable('disable');
 
     // Make the draggable disabled too so that the user can't drag the tile back to the rack.
@@ -167,9 +165,6 @@ function save_word() {
  *    This function will force all the tiles in the game_tiles array back into the rack.
  */
 function reset_tiles() {
-  // Let the user know what's going on.
-  $("#messages").html("<br><div class='highlight_centered_success'> \
-  MOVING ALL TILES BACK TO THE RACK.</div>");
 
   // Load up the 7 pieces and move them back to the game rack.
   for(var i = 0; i < 7; i++) {
@@ -205,40 +200,6 @@ function reset_tiles() {
   return;
 }
 
-
-/**
- *    This function confirms that the user wants to reset the entire game board.
- *    This function uses a cool alert replacement called Sweet Alert.
- *    URL: https://t4t5.github.io/sweetalert/
- */
-function confirm_reset() {
-  // Since the reset function is very destructive, we should confirm with the user if
-  // they are SURE they want to clear the entire game board.
-  swal({
-    title: "Are you sure?",
-    text: "This will clear the ENTIRE game board, reset your tiles and destroy \
-    any words that were placed.\n Are you really sure you want to do this?",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes.",
-    closeOnConfirm: true
-    },
-    // This is from the example page at: https://t4t5.github.io/sweetalert/
-    // Basically I can quit if the user hits cancel, or continue if they hit Yes.
-    function(isConfirm) {
-      if (isConfirm) {
-        reset_game_board();
-        return false;
-      }
-      else {
-        // Let the user know what's going on.
-        $("#messages").html("<br><div class='highlight_centered_success'> \
-        RESET BOARD CANCELED.</div>");
-        return false;
-      }
-  });
-}
 
 
 /**
@@ -300,12 +261,7 @@ function reset_game_board() {
   // Resets the HTML "Word: " and "Score: " display.
   find_word();    // Technically this returns -1 and just wipes the display clean.
 
-  // Update the "Letters Remaining" table.
+  
 
-  // Let the user know what's going on.
-  $("#messages").html("<br><div class='highlight_centered_success'> \
-  BOARD AND TILES RESET.<br>CHECK THE RACK FOR NEW TILES.</div>");
-
-  // Now we're done! Woot!
   return;
 }
