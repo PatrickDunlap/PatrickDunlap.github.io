@@ -43,7 +43,7 @@ function submit_word() {
     // If it is, AWESOME! The user is so smart.
     $("#messages").html("<br><div class='highlight_centered_success'> \
     Nice job! \"" + word + "\" is considered a word by the game's dictionary!<br><br> \
-    <button class='smaller_button' onclick='save_word();'>Save Word & Play Again.</button><br><br></div>");
+    <button class='smaller_button' onclick='save_word();'>Continue?.</button><br><br></div>");
     return 1;
   }
   else {
