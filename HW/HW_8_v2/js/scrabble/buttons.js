@@ -45,7 +45,7 @@ function submit_word() {
 
   // The user needs to play a tile first...
   if (word == "____") {
-  
+    // The user isn't so smart. Tell them to try again.
     $("#messages").html("<br><div class='highlight_centered_error'> \
     Sorry, but you need to play a tile before I can check the word for you!</div>");
     console.log("Please play some tiles first.");
@@ -69,11 +69,12 @@ function submit_word() {
   if ( dict[ word ] ) {
     // If it is, AWESOME! The user is so smart.
     $("#messages").html("<br><div class='highlight_centered_success'> \
-    Nice job! \"" + word + "\" is considered a word by the game's dictionary!<br><br> ");
-    save_word();
+    Nice job! \"" + word + "\" is considered a word by the game's dictionary!<br><br> \
+    <button class='smaller_button' onclick='confirm_save_word();'>Save Word & Play Again.</button><br><br></div>");
     return 1;
   }
   else {
+    // User isn't so smart. Tell them to try again.
     $("#messages").html("<br><div class='highlight_centered_error'> \
     Sorry. \"" + word + "\" is not a word in the English dictionary. \
     I suggest trying a different word. Or try resetting your tiles and trying again.</div>");
@@ -83,6 +84,38 @@ function submit_word() {
 }
 
 
+/**
+ *    This function confirms that the user wants to save the currently played word.
+ *    This function uses a cool alert replacement called Sweet Alert.
+ *    URL: https://t4t5.github.io/sweetalert/
+ */
+function confirm_save_word() {
+  swal({
+    title: "Are you sure?",
+    text: "This will save the current word to the game board.\n\
+    You will not be able to modify the word afterwards.\n \
+    Are you sure you want to keep this word and play another one?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes.",
+    closeOnConfirm: true
+    },
+    // This is from the example page at: https://t4t5.github.io/sweetalert/
+    // Basically I can quit if the user hits cancel, or continue if they hit Yes.
+    function(isConfirm) {
+      if (isConfirm) {
+        save_word();
+        return false;
+      }
+      else {
+        // Let the user know what's going on.
+        $("#messages").html("<br><div class='highlight_centered_error'> \
+        SUBMIT WORD CANCELED.</div>");
+        return false;
+      }
+  });
+}
 
 
 /**
