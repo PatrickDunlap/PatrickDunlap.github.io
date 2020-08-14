@@ -15,13 +15,13 @@ $( document ).ready(function() {
 function find_word(read_left) {
   var word = "";            // The current word.
   var current_score = 0;        // create the current score and start it at 0
-  var saved_score = word_score;       // Saved score from previous words.
+  var saved_score = word_score;    // Saved score from previous words.
   var board_length = game_board.length;       
   var word_count = complete_words.length;    
 
   // The word is now blank.
   $("#word").html("____");
-  $("#score").html(saved_score);    // Technically this starts at 0, then adds up to whatever the saved score is.
+  $("#score").html(saved_score);    // This should start at 0
 
   // Go through the game board and generate a possible word.
   for(var i = 0; i < board_length; i++) {
@@ -85,7 +85,6 @@ function find_score(given_id) {
       score = obj.value;
 
       // Need to determine if this piece is a DOUBLE or not.
-      // Droppable zones 6 & 8 are DOUBLE letter scores.
       var extra = score * letter_multiplier(given_id);
       score = score + extra;
 
