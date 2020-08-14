@@ -9,6 +9,9 @@
  *    but all rules for where a tile can be dropped come from this function.
  *
  */
+
+
+
 function load_droppable_targets() {
 
   /**
@@ -23,40 +26,7 @@ function load_droppable_targets() {
     drop: function(event, ui) {
       var draggableID = ui.draggable.attr("id");
       var droppableID = $(this).attr("id");
-
-      // Let the user know what's going on.
-      $("#messages").html("<br><div class='highlight_centered_success'> \
-      Swapping old tile for a new one.<br> Check the rack / board for your new tile!</div>");
-
-      // Generate a new tile (using get_random_tile() ) and remove the old tile.
-      // Also add it back into the pieces array so it's a straight swap. (no loss of ties)
-
-      // Get new letter. Also create a new image source that will be applied later.
-      var new_letter = get_random_tile();
-
-      // Put the old letter back.
-      var old_letter = find_letter(draggableID);
-
-      // Debugging
-      console.log("Entering $(\"#get_new_tile\").droppable()");
-      console.log("draggableID = " + draggableID);
-      console.log("Old letter = " + old_letter + " New letter = " + new_letter);
-
-      // Go through the pieces array to find the letter we want to put back.
-      // Basically put it back in the "bag" of letters
-      for(var i = 0; i < 26; i++) {
-        // If we found the letter we are trying to swap
-        if(pieces[i].letter == old_letter) {
-          pieces[i].remaining++;  // Then increment by one so it's back in the bag.
-        }
-      }
-
-      // Now we can change the letter of the tile to the new letter.
-      for(var i = 0; i < 7; i++) {
-        if(game_tiles[i].id == draggableID) {       // Find the tile in the game tile array.
-          game_tiles[i].letter = new_letter;        // Assign the new letter to the tile.
-        }
-      }
+      
 
       // Update the tile piece with the new image.
       // The idea came from this post on Stackoverflow:
@@ -74,13 +44,13 @@ function load_droppable_targets() {
       ui.draggable.css("position", "absolute");
 
       // Update the letter's remaining table
-      update_remaining_table();
 
       // Update the word as well, in case the user changed the word.
       find_word();
-    }
+    } 
 
   });
+
 
 
   /**
