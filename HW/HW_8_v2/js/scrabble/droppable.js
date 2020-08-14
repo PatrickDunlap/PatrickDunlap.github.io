@@ -93,9 +93,6 @@ function load_droppable_targets() {
       ui.draggable.css("top", posY);
       ui.draggable.css("position", "absolute");
 
-      // Update the letter's remaining table
-      update_remaining_table();
-
       // Update the word as well, in case the user changed the word.
       find_word();
     }
