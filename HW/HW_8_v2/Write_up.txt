@@ -1,0 +1,7 @@
+In the scrabble project, I implemnted the following features:
+
+-I implemented a full board with all of the double letter, double word, triple letter, and triple word
+-The program will check to make sure the first letter is dragged onto the star and that following letters are adjacent
+-The program can save a word and reset your rack while keeping track of every word you have played thus far
+-Tiles can be reset to their original places
+-The program allows you to reset the board back to what it was originally

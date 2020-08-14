@@ -172,16 +172,15 @@ function reset_tiles() {
 
     // Reposition the tile on top of the rack, nicely in a row with the other tiles.
 
-    // We first get the rack's location on the screen. Idea from a Stackoverflow post,
-    // Source Used https://stackoverflow.com/questions/885144/how-to-get-current-position-of-an-image-in-jquery
+   
     var pos = $("#the_rack").position();
 
-    // Now figure out where to reposition the board piece.
+  
 
     var img_left = pos.left + 30 + (50 * i);      // This controls left to right placement.
     var img_top = pos.top + 30;                   // This controls top to bottom placement.
 
-    // Move the piece relative to where the rack is located on the screen.
+    // 
     $(piece_ID).css("left", img_left).css("top", img_top).css("position", "absolute");
 
     $('#rack').append($(piece_ID));
