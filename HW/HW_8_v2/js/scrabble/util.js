@@ -1,25 +1,6 @@
-/*
-    File: ~/js/scrabble/util.js
-    91.461 Assignment 9: Implementing a Bit of Scrabble with Drag-and-Drop
-    Jason Downing - student at UMass Lowell in 91.461 GUI Programming I
-    Contact: jdowning@cs.uml.edu or jason_downing@student.uml.edu
-    MIT Licensed - see http://opensource.org/licenses/MIT for details.
-    Anyone may freely use this code. Just don't sue me if it breaks stuff.
-    Created: Nov 24, 2015.
-    Last Updated: Dec 8, 9PM.
-
-    This JavaScript file is for the 9th assignment, "Scrabble".
-
-    This file contains any utility functions for the other JS files.
-*/
 
 
-/**
- * Returns a random integer between min (inclusive) and max (inclusive)
- * Using Math.round() will give you a non-uniform distribution!
- *
- * I did not originally write this, it is from this Stackoverflow post:
- * URL: https://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
+ /* Source used: https://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
  */
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -118,60 +99,6 @@ function get_random_tile() {
 }
 
 
-/**
- *      This function will update the "Letters Remaining" table.
- *      The table has 3 rows of 9 cells, but the very last cell (row 3, cell 9)
- *      is empty and should remain empty.
- *
- *      URL for info on this function:
- *      https://stackoverflow.com/questions/3065342/how-do-i-iterate-through-table-rows-and-cells-in-javascript
- *
- */
-function update_remaining_table() {
-  var x = 0;
-  var first = true;
-
-  // Go through every cell in the table and update it.
-  $('#letters_remain tr').each(function() {
-
-    // DO NOT go over the limit of the array! Currently there is 27 elements in the
-    // array. So we should stop at 27, since we are going 0 to 26.
-    // Make sure to return false for this to work (THANK YOU STACKOVERFLOW)
-    // URL for that amazing tip: https://stackoverflow.com/questions/1784780/how-to-break-out-of-jquery-each-loop
-    if (x > 25) {   // hack to make Blank show "2".
-      // Quit before bad things happen.
-      return true;
-    }
-
-    $(this).find('td').each(function() {
-      // Skip the first row, we don't want to mess with it.
-      if (first == true) {
-        first = false;
-        return false;
-      }
-
-      // DO NOT go over the limit of the array! Currently there is 27 elements in the
-      // array. So we should stop at 27, since we are going 0 to 26.
-      if (x > 25) {
-        // Quit before bad things happen.
-        return false;
-      }
-
-      // Easier to use variables for this stuff.
-      var letter = pieces[x].letter;
-      var remaining = pieces[x].remaining;
-
-      // Using "$(this)" access each cell.
-      $(this).html(letter + ": " + remaining);
-
-      x++;    // Keep looping
-      return true;
-    });
-    return true;
-  });
-
-  return true;
-}
 
 
 // This function is an easy way to reset the pieces array / objects.

@@ -218,7 +218,6 @@ function save_word() {
   find_word();
 
   // Update remaining letters table.
-  update_remaining_table();
 
   // Should be done now!
   return;
@@ -364,7 +363,6 @@ function reset_game_board() {
   find_word();    // Technically this returns -1 and just wipes the display clean.
 
   // Update the "Letters Remaining" table.
-  update_remaining_table();
 
   // Let the user know what's going on.
   $("#messages").html("<br><div class='highlight_centered_success'> \
