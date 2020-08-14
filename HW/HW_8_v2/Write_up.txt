@@ -4,4 +4,10 @@ In the scrabble project, I implemnted the following features:
 -The program will check to make sure the first letter is dragged onto the star and that following letters are adjacent
 -The program can save a word and reset your rack while keeping track of every word you have played thus far
 -Tiles can be reset to their original places
--The program allows you to reset the board back to what it was originally
+-The program allows you to reset the board back to what it was originally before you placed specific tiles
+
+Bugs:
+
+-When an message is printed at the top of the screen, it will currently shift all of the elements on the page down which
+makes it so the rack no aligns with the letters. I have tried fixing this by making the error messages absolute in CSS which
+did not work. I also attempted changing to fixed that appeared to be more annoying to me than the bug itself.
